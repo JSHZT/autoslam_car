@@ -1,0 +1,8 @@
+prefix=/home/pi/autoslam_gm/devel
+
+Name: obrobot_tools
+Description: Description of obrobot_tools
+Version: 0.0.0
+Cflags: -I/home/pi/autoslam_gm/devel/include
+Libs: -L/home/pi/autoslam_gm/devel/lib 
+Requires: actionlib_msgs

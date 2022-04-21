@@ -1,0 +1,17 @@
+<package>
+  <description brief="obrobot_rviz">
+
+     obrobot_rviz
+
+  </description>
+  <author>ob</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/obrobot_rviz</url>
+  <depend package="std_msgs"/>
+  <depend package="rospy"/>
+  <depend package="roscpp"/>
+
+</package>
+
+

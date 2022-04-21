@@ -1,0 +1,8 @@
+prefix=/home/pi/autoslam_gm/install
+
+Name: obrobot_rviz
+Description: Description of obrobot_rviz
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/pi/autoslam_gm/install/lib 
+Requires: 

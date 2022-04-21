@@ -1,0 +1,10 @@
+
+<launch>
+  <node pkg="sc_mini" type="sc_mini" name="sc_mini" output="screen">
+    <param name="frame_id" type="string" value="laser_frame"/>
+    <param name="port" type="string" value="/dev/ob_lidar"/>
+    <param name="baud_rate" type="int" value="115200"/>
+  </node>
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser4"
+    args="0.067 0.0 0.125 0.0 0.0  0.0 /base_footprint /laser_frame 40" />
+</launch>

@@ -1,0 +1,2 @@
+obrobot_description:obrobot_driver:obrobot_navigation:obrobot_rviz:obrobot_tools:sc_mini
+-DCATKIN_DEVEL_PREFIX=/home/pi/autoslam_gm/devel -DCMAKE_INSTALL_PREFIX=/home/pi/autoslam_gm/install -G Unix Makefiles

@@ -1,0 +1,17 @@
+<package>
+  <description brief="obrobot_tools">
+
+     obrobot_tools
+
+  </description>
+  <author>ob</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/obrobot_tools</url>
+  <depend package="std_msgs"/>
+  <depend package="rospy"/>
+  <depend package="roscpp"/>
+
+</package>
+
+

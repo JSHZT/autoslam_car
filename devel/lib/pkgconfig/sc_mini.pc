@@ -1,0 +1,8 @@
+prefix=/home/pi/autoslam_gm/devel
+
+Name: sc_mini
+Description: Description of sc_mini
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/pi/autoslam_gm/devel/lib 
+Requires: 

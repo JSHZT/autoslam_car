@@ -1,0 +1,57 @@
+
+port: /dev/ttyUSB0
+#port: /dev/ob_car
+baud: 115200
+timeout: 0.1
+rate: 30
+# sensorstate_rate: 10
+
+useImu: False
+useSonar: False
+use_base_controller: True
+#base_controller_rate: 30 #10
+slam_project_version: 20190801
+
+
+sonar_height: 0.15
+sonar_safe_distance: 8
+sonar_dec_distance: 40.0  ##decelerate
+
+sonar0_offset_yaw: 3.14
+sonar0_offset_x: -0.091
+sonar0_offset_y: -0.11
+
+sonar1_offset_yaw: -0.70
+sonar1_offset_x: 0.265
+sonar1_offset_y: -0.128
+
+sonar2_offset_yaw: 0.0
+sonar2_offset_x: 0.27
+sonar2_offset_y: 0.0
+
+sonar3_offset_yaw: 0.70 
+sonar3_offset_x: 0.265
+sonar3_offset_y: 0.128
+
+sonar4_offset_yaw: 3.14
+sonar4_offset_x: -0.091
+sonar4_offset_y: 0.11
+
+# For a robot that uses base_footprint, change base_frame to base_footprint
+#base_frame: base_link
+base_frame: base_footprint
+
+# === Robot drivetrain parameters
+wheel_diameter: 0.0775 #0.08 #mini_car
+wheel_track: 0.255 #0.24 #mini_car
+encoder_resolution: 330 #mini_car
+
+gear_reduction: 1.0
+motors_reversed: False
+
+# === PID parameters
+Kp: 50
+Kd: 20
+Ki: 0
+Ko: 50
+accel_limit: 3.0 #1.0

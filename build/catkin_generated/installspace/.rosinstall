@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/pi/autoslam_gm/install/setup.sh

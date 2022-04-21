@@ -1,0 +1,52 @@
+<!--
+-->
+<launch>
+
+  <arg name="bag_path" default="$(env HOME)/.ob/bag"/>
+  <arg name="bag_name" default="ob_record_data"/>
+
+  <node pkg="rosbag" type="record" name="playbag" output="log" respawn="false" args=" /scan /tf --size 500 -O $(arg bag_path)/$(arg bag_name)
+"/>
+
+  <include file="$(find obrobot_driver)/launch/driver.launch"/>
+  <include file="$(find sc_mini)/launch/start.launch"/>
+
+
+  <include file="$(find obrobot_description)/launch/obrobot_description.launch"/>
+  <include file="$(find obrobot_navigation)/launch/include/odom/gmapping_base.launch"/>
+  <include file="$(find obrobot_navigation)/launch/include/odom/teb_move_base_map.launch"/>
+<!--
+  <include file="$(find world_canvas_server)/launch/world_canvas_server.launch"/>
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+-->
+  <node name="robot_pose_publisher" pkg="robot_pose_publisher" type="robot_pose_publisher" />
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" output="screen" name="laser_filter">
+      <rosparam command="load" file="$(find obrobot_tools)/conf/box_filter.yaml" />
+  </node>
+
+<!--
+  <node name="robot_data" pkg="obrobot_tools" type="robot_data.py" respawn="true" />
+  <node name="cmd_listen" pkg="obrobot_tools" type="cmdListen.py" respawn="true" />
+-->
+
+<!--
+  <node name="auto_map_find_goal" pkg="turtlebot_navigation" type="ob_img_1207.py" respawn="true" />
+  <node name="auto_map_nav" pkg="turtlebot_navigation" type="ob_nav.py" respawn="true" />
+  <node name="auto_map_nav" pkg="obrobot_navigation" type="ob_nav_zark.py" output="screen" respawn="true" />
+-->
+
+
+  <node name="ob_pose_service" pkg="obrobot_navigation" type="ob_posemanage_service_yimu.py" output="log" respawn="true" />
+
+
+  <!-- rviz driver -->
+
+<!--
+  <include file="$(find obrobot_rviz)/launch/view_navigation.launch" />
+-->
+
+
+</launch>
+
+
+

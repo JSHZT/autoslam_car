@@ -1,0 +1,4 @@
+obrobot_navigation/PoseOperation poseoperation
+---
+string status
+obrobot_navigation/PoseDefine posedefine

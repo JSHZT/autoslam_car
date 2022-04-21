@@ -1,0 +1,3 @@
+<launch>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find obrobot_rviz)/rviz/rviz_test.rviz"/>
+</launch>

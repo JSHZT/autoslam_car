@@ -1,0 +1,131 @@
+TebLocalPlannerROS:
+
+ odom_topic: odom
+ #odom_topic: /robot_pose_ekf/odom_combined
+ map_frame: /map
+ #map_frame: /odom_combined
+
+ # Robot
+
+ max_vel_x: 0.2 #0.15 #
+ max_vel_x_backwards: 0.15 #0.1 #
+# max_vel_theta: 0.5 #0.5-travis-test, #0.35-org
+ max_vel_theta: 0.6 #0.5-travis-test, #0.35-org 0322
+ acc_lim_x: 0.4 #0.3 #0.3-travis-test, #0.15-org
+ acc_lim_theta: 0.6 #1.0 #1.8-travis-test, #0.25-org
+ min_turning_radius: 0.0 #0.3 #0.15 #0.0 zark
+ #是否允许原地转
+# cmd_angle_instead_rotvel: True  # cmd_angle_instead_rotvel(bool,defaule:false) 是否允许原地转 zark
+ footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
+  #  types: "polygon"
+  #  types: "circular"
+  #  radius: 0.23 # for type "circular"
+   #vertices: [[-0.1, -0.26], [-0.1, 0.26], [0.287, 0.26], [0.287, -0.26]]
+   #vertices: [[-0.085, -0.20], [-0.085, 0.2], [0.315, 0.2], [0.315, -0.2]]  #EAI
+   #vertices: [[-0.27, -0.27], [-0.27, 0.27], [0.39, 0.27], [0.39, -0.27]] #pisong_robot
+  #  vertices: [[-0.094, -0.205], [-0.094, 0.205], [0.324, 0.205], [0.324, -0.205]] #OB_robot
+  # vertices: [[-0.2, -0.205], [-0.2, 0.205], [0.256, 0.205], [0.324, 0.105], [0.324, -0.105], [0.256, -0.205]]  #OB_robot #zark
+  #  vertices: [[-0.2, -0.155], [-0.2, 0.155], [0.324, 0.155], [0.324, -0.155]]
+   vertices: [[-0.186, -0.124], [-0.186, 0.124], [0.186, 0.124], [0.186, -0.124]] #OB_mini
+
+#footprint: [[-0.094, -0.205], [-0.094, 0.205], [0.324, 0.205], [0.324, -0.205]] #OB_robot
+#footprint: [[-0.27, -0.27], [-0.27, 0.27], [0.39, 0.27], [0.39, -0.27]] #pisong_robot
+#footprint: [[-0.085, -0.20], [-0.085, 0.2], [0.315, 0.2], [0.315, -0.2]] #EAI
+
+
+ # GoalTolerance
+
+ xy_goal_tolerance: 0.5 #0.5 #0.2 #0.15-travis #0.2
+ yaw_goal_tolerance: 3.2 #3.0 #0.2 #0.15-travis #0.5
+# xy_goal_tolerance: 0.2 #0.2 #0.15-travis #0.2
+# yaw_goal_tolerance: 0.2 #0.2 #0.15-travis #0.5
+ free_goal_vel: False
+
+ # Trajectory
+
+ teb_autosize: True
+ dt_ref: 0.3 #0.45 #0.45 yimu 规划器旨在根据期望的时间分辨率（参数dt_ref）来布置每两个连续的姿势 注意，实际分辨率不是固定/冻结的，因为优化器需要调整转换时间以寻求时间最优性
+ dt_hysteresis: 0.1
+ global_plan_overwrite_orientation: False #True #yimu
+ max_global_plan_lookahead_dist: 3.0
+ feasibility_check_no_poses: 5
+ allow_init_with_backwards_motion: True # zark
+
+ # Obstacles
+
+ #min_obstacle_dist: 0.4 #0.35 #0.47 #0.42 #0.47 #0.27 #0.27-travis #0.22-org
+ min_obstacle_dist: 0.2 #0.25zark #0.47 #0.42 #0.47 #0.27 #0.27-travis #0.22-org
+ include_costmap_obstacles: True
+#  include_dynamic_obstacles: True #zark
+ costmap_obstacles_behind_robot_dist: 1.0
+ obstacle_poses_affected: 3 #40 #40 #yimu
+ costmap_converter_plugin: ""
+# costmap_converter_spin_thread: False
+# costmap_converter_rate: 3
+
+ # Optimization
+
+#  no_inner_iterations: 5 #1-zark
+#  no_outer_iterations: 4 #1-zark
+#  optimization_activate: True
+#  optimization_verbose: False
+#  penalty_epsilon: 0.1
+#  weight_max_vel_x: 20
+#  weight_max_vel_theta: 10
+#  weight_acc_lim_x: 5
+#  weight_acc_lim_theta: 5
+#  weight_kinematics_nh: 1000
+#  weight_kinematics_forward_drive: 100
+#  weight_kinematics_turning_radius: 1
+#  weight_optimaltime: 1
+#  weight_obstacle: 1000
+#  weight_dynamic_obstacle: 10 # not in use yet
+#  selection_alternative_time_cost: False # not in use yet
+
+#  no_inner_iterations: 5 #1-zark
+#  no_outer_iterations: 4 #1-zark
+#  optimization_activate: True
+#  optimization_verbose: False
+#  penalty_epsilon: 0.1
+#  weight_max_vel_x: 2
+#  weight_max_vel_theta: 1
+#  weight_acc_lim_x: 1
+#  weight_acc_lim_theta: 1
+#  weight_kinematics_nh: 1000
+#  weight_kinematics_forward_drive: 1
+#  weight_kinematics_turning_radius: 5
+#  weight_optimaltime: 1
+#  weight_obstacle: 50
+#  weight_dynamic_obstacle: 10 # not in use yet
+#  selection_alternative_time_cost: False # not in use yet
+
+ no_inner_iterations: 1 #1-zark
+ no_outer_iterations: 1 #1-zark
+ optimization_activate: True
+ optimization_verbose: False
+ penalty_epsilon: 0.1
+ weight_max_vel_x: 2
+ weight_max_vel_theta: 1
+ weight_acc_lim_x: 1
+ weight_acc_lim_theta: 1
+ weight_kinematics_nh: 1000
+ weight_kinematics_forward_drive: 50.0
+ weight_kinematics_turning_radius: 1.0
+ weight_optimaltime: 0.5
+ weight_obstacle: 50
+ weight_dynamic_obstacle: 10 # not in use yet
+ selection_alternative_time_cost: False # not in use yet
+
+ # Homotopy Class Planner
+
+ enable_homotopy_class_planning: False
+ enable_multithreading: True
+ simple_exploration: False
+ max_number_classes: 1 #4 #1-zark
+ roadmap_graph_no_samples: 5 #15 #5 #15 #指定为创建路线图而生成的样本数 yimu
+ roadmap_graph_area_width: 5
+ h_signature_prescaler: 0.5
+ h_signature_threshold: 0.1
+ obstacle_keypoint_offset: 0.1
+ obstacle_heading_threshold: 0.45
+ visualize_hc_graph: False

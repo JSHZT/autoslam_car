@@ -1,0 +1,61 @@
+<!--
+-->
+<launch>
+
+  <include file="$(find obrobot_driver)/launch/driver.launch"/>
+  <include file="$(find sc_mini)/launch/start.launch"/>
+  <include file="$(find obrobot_description)/launch/obrobot_description.launch"/>
+
+  <!-- Map server -->
+  <arg name="map_file" default="$(env HOME)/.ob/map/ob_autoslam.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+
+  <arg name="initial_pose_x" default="0.0"/> 
+  <arg name="initial_pose_y" default="0.0"/> 
+  <arg name="initial_pose_a" default="0.0"/>
+  <include file="$(find obrobot_navigation)/launch/include/odom/amcl.launch">
+    <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+    <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+    <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+  </include>
+  <include file="$(find obrobot_navigation)/launch/include/odom/teb_move_base_nav.launch"/>
+
+
+<!--
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+  <include file="$(find world_canvas_server)/launch/world_canvas_server.launch"/> 
+-->
+
+  <node name="robot_pose_publisher" pkg="robot_pose_publisher" type="robot_pose_publisher" />
+
+<!--
+  <node name="multiGoalListen" pkg="obrobot_tools" type="multiGoalListen.py" respawn="true" />
+  <node name="cancelGoalListen" pkg="obrobot_tools" type="cancelGoalListen.py" respawn="true" />
+-->
+
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" output="screen" name="laser_filter">
+      <rosparam command="load" file="$(find obrobot_tools)/conf/box_filter.yaml" />
+  </node>
+
+<!--
+  <node name="robot_data" pkg="obrobot_tools" type="robot_data.py" respawn="true" />
+  <node name="cmd_listen" pkg="obrobot_tools" type="cmdListen.py" respawn="true" />
+-->
+ 
+  <node name="ob_pose_service" pkg="obrobot_navigation" type="ob_posemanage_service_yimu.py" output="screen" respawn="false" />
+  <node name="ob_navigation" pkg="obrobot_navigation" type="ob_nav_zark.py" output="screen" respawn="false" />
+  <node name="ob_relocation" pkg="obrobot_navigation" type="ob_relocation_zark.py" output="screen" respawn="false" />
+  <!--<node name="ob_recharge" pkg="obrobot_navigation" type="ob_recharge_zark3.py" output="screen" respawn="false" />-->
+  <!--<node name="ob_test_point" pkg="obrobot_navigation" type="ob_zark_test_point.py" output="screen" respawn="true" />-->
+
+
+  <!-- rviz driver -->
+<!--
+  <include file="$(find obrobot_rviz)/launch/view_navigation.launch" />
+-->
+
+</launch>
+
+
+
